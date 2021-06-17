@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {MdDelete} from 'react-icons/md';
+import { MdDelete } from 'react-icons/md';
 function TaskList() {
     const [input, setInput] = useState("");
     const [todoList, setTodoList] = useState(["Example task #1", "Example task #2", "Example task #3"]);
@@ -14,6 +14,15 @@ function TaskList() {
         let list = todoList;
         list.splice(index, 1);
         setTodoList([...list]);
+    }
+    function itemsRemaining() {
+        let aux = "";
+        if (todoList.length <= 1) {
+            aux = todoList.length + " item left"
+        } else {
+            aux = todoList.length + " items left"
+        }
+        return aux;
     }
     return (
         <div className="card w-100">
@@ -37,7 +46,9 @@ function TaskList() {
                         </ul>
                     );
                 }) : ""}
-            <div className="card-footer text-muted d-flex justify-content-center"> {todoList.length <= 1 ? todoList.length + " item left" : todoList.length + " items left"}</div>
+            <div className="card-footer text-muted d-flex justify-content-center">
+                {itemsRemaining()}
+            </div>
         </div>
     );
 }
